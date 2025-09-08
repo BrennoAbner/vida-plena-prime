@@ -1,57 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Clínica Vida Plena Design System - Professional Medical Landing Page */
 
 @layer base {
   :root {
+    /* Clínica Vida Plena Color Palette */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 210 11% 20%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 210 11% 20%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
+    --popover-foreground: 210 11% 20%;
+    
+    /* Primary: Verde-azulado suave para ações e destaques */
+    --primary: 180 51% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 180 51% 32%;
+    
+    /* Secondary: Cinza escuro para títulos */
+    --secondary: 210 11% 20%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Light gray background for sections */
+    --section-bg: 0 0% 97%;
+    --section-foreground: 210 11% 20%;
+    
+    --muted: 0 0% 97%;
+    --muted-foreground: 210 11% 46%;
+    
+    --accent: 180 51% 95%;
+    --accent-foreground: 180 51% 36%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 31% 91%;
+    --input: 214 31% 91%;
+    --ring: 180 51% 36%;
+    
+    --radius: 0.75rem;
+    
+    /* Medical-specific colors */
+    --medical-trust: 180 51% 36%;
+    --medical-care: 160 70% 45%;
+    --medical-calm: 200 25% 95%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(180 51% 36%) 0%, hsl(160 70% 45%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 97%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -8px hsl(180 51% 36% / 0.15);
+    --shadow-card: 0 10px 30px -10px hsl(180 51% 36% / 0.1);
+    --shadow-hero: 0 20px 40px -20px hsl(180 51% 36% / 0.3);
+    
+    /* Typography scale */
+    --text-hero: 3.5rem;
+    --text-xl: 2rem;
+    --text-lg: 1.25rem;
+    --text-base: 1rem;
+    --text-sm: 0.875rem;
+    
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -100,6 +122,83 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-lato;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-semibold text-secondary;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl leading-tight;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+}
+
+@layer components {
+  /* Hero Button Variant */
+  .btn-hero {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-poppins font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105;
+  }
+  
+  /* Card Component */
+  .medical-card {
+    @apply bg-card rounded-2xl p-6 md:p-8 shadow-md hover:shadow-lg transition-all duration-300 border border-border/50;
+  }
+  
+  /* Section Background */
+  .section-alt {
+    @apply bg-muted;
+  }
+  
+  /* Form Input */
+  .form-input {
+    @apply w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200;
+  }
+  
+  /* Smooth transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent-foreground bg-clip-text text-transparent;
+  }
+  
+  /* Hero gradient background */
+  .bg-hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Custom shadows */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-hero {
+    box-shadow: var(--shadow-hero);
   }
 }
