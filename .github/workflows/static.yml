@@ -1,56 +1,54 @@
-# Nome do nosso fluxo de trabalho
+
 name: Deploy do Site para GitHub Pages
 
-# Gatilho: Quando o robô deve trabalhar?
+
 on:
-  # Toda vez que você enviar ("push") código para a branch 'main'
+
   push:
     branches: ['main']
-  # Também permite que você rode manualmente pela aba "Actions"
+
   workflow_dispatch:
 
-# Permissões que o robô precisa para publicar a página
+
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Evita que vários robôs trabalhem ao mesmo tempo no mesmo projeto
+
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
-# A lista de tarefas do robô
+
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest # O robô usará um computador com Linux
+    runs-on: ubuntu-latest 
     steps:
-      # Tarefa 1: Baixar o código do seu repositório
+   
       - name: Checkout
         uses: actions/checkout@v4
-      # Tarefa 2: Instalar o Node.js, a ferramenta principal
-      - name: Set up Node.js
+      
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      # Tarefa 3: Instalar todas as dependências do projeto
+ 
       - name: Install dependencies
         run: npm install
-      # Tarefa 4: Construir o site (transformar o código em HTML/CSS/JS otimizado)
-      - name: Build
+      
         run: npm run build
-      # Tarefa 5: Preparar o ambiente para a publicação no GitHub Pages
+     
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      # Tarefa 6: Fazer o upload do site construído (que está na pasta 'dist')
+     
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-      # Tarefa 7: Publicar o site!
+   
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
